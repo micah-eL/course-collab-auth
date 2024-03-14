@@ -4,10 +4,10 @@ const router = express.Router();
 
 const {
     loginUser,
-} = require("../../controllers/login");
+} = require("../controllers/auth");
 
 
-router.post("/", loginUser);
+router.post("/login", loginUser);
 
 
 module.exports = router;

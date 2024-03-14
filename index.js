@@ -38,10 +38,10 @@ app.get("/api/coursecollab/health", (req, res) => {
     res.status(200).json({health: "Course Collab auth service OK"});
 });
 
-const loginRouter = require('./routes/login');
-app.use("/api/login", loginRouter);
+const authRouter = require('./routes/auth');
+app.use("/api/auth", authRouter);
 
 const usersRouter = require('./routes/users');
-app.use("/api/login", usersRouter);
+app.use("/api/users", usersRouter);
 
 
