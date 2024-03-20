@@ -34,7 +34,7 @@ app.use("/api", [logger]);
 
 
 // Import and setup routes
-app.get("/api/coursecollab/health", (req, res) => {
+app.get("/api/health", (req, res) => {
     res.status(200).json({health: "Course Collab auth service OK"});
 });
 

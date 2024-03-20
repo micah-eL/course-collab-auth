@@ -27,7 +27,7 @@ const loginUser = async (req, res) => {
         userFieldsForToken,
         process.env.SECRET
     )
-    res.status(200).send({token, email: userToLogin.email, firstName: userToLogin.firstName, lastName: userToLogin.lastName, id: userToLogin._id})
+    res.status(200).send({status: "success", data: userToLogin, token: token});
 }
 
 
