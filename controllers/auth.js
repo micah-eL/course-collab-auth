@@ -25,7 +25,7 @@ const loginUser = async (req, res) => {
     }
     const token = jwt.sign(  // no expiration time for token for now
         userFieldsForToken,
-        process.env.SECRET
+        "tmp-prod-secret" //process.env.SECRET
     )
     res.status(200).send({status: "success", data: userToLogin, token: token});
 }

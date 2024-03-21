@@ -5,7 +5,7 @@ const express = require("express");
 const app = express();
 const cors = require('cors');
 app.use(cors());
-const PORT = process.env.API_PORT;
+const PORT = 3002; //process.env.API_PORT;
 app.use(express.json());
 app.set("json spaces", 4);
 app.use(express.static(__dirname + "/public")); 
