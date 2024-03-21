@@ -1,4 +1,5 @@
 // Instantiate and setup Express app
+const gcpMetadata = require('gcp-metadata');
 require("dotenv").config();
 const express = require("express");
 const app = express();
@@ -12,13 +13,24 @@ app.use(express.static(__dirname + "/public"));
 
 // Start server once connected to database
 const mongoose = require("mongoose");
-const dbURI = process.env.MONGODB_URI;
 getConnection = async () => {
     try {
-        await mongoose.connect(dbURI);
+        const metadataIsAvailable = await gcpMetadata.isAvailable();
+        if (metadataIsAvailable) {
+            await mongoose.connect(
+                await gcpMetadata.instance('MONGODB_ATLAS_URI'),
+                { }
+            );
+        }
+        else {
+            await mongoose.connect(
+                process.env.MONGODB_ATLAS_URI,
+                { }
+            );
+        }
         console.log("Connected to db...");
-        app.listen(PORT, () => {
-            console.log(`Server is listening on http://localhost:${PORT} ...`);
+        app.listen(PORT, '0.0.0.0', () => {
+            console.log(`Server is listening on http://0.0.0.0:${PORT} ...`);
         });
     } catch (err) {
         console.log(err);
