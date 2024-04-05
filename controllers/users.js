@@ -47,8 +47,19 @@ const createUser = async (req, res) => {
 
 // Update User
 const updateUser = async (req, res) => {
-    // TODO: Implement update endpoint
-    res.status(501).json({status: "fail", data: "Update not implemented"});
+    const {userID} = req.params;
+    try {
+        const queriedUser = await User.findById(userID);
+        if (req.body.joinedCourses != null) {
+            queriedUser.joinedCourses = req.body.joinedCourses;
+        }
+        const updatedUser = await queriedUser.save();
+        res.status(200).json({status: "success", data: updatedUser});
+    } catch (err) {
+        res.status(400).json({status: "fail", data: err.message});
+    }
+
+
 };
 
 // Delete User

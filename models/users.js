@@ -13,6 +13,7 @@ const userSchema = new mongoose.Schema({
     passwordHash: String,
     firstName: String,
     lastName: String,
+    joinedCourses: [String],
 }, { timestamps: true });
 
 
