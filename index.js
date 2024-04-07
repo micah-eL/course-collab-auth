@@ -5,7 +5,7 @@ const express = require("express");
 const app = express();
 const cors = require('cors');
 app.use(cors());
-const PORT = 3002; //process.env.API_PORT;
+const PORT = process.env.API_PORT;
 app.use(express.json());
 app.set("json spaces", 4);
 app.use(express.static(__dirname + "/public")); 
@@ -15,28 +15,13 @@ app.use(express.static(__dirname + "/public"));
 const mongoose = require("mongoose");
 getConnection = async () => {
     try {
-        /*
-        const metadataIsAvailable = await gcpMetadata.isAvailable();
-        if (metadataIsAvailable) {
-            await mongoose.connect(
-                await gcpMetadata.instance('MONGODB_ATLAS_URI'),
-                { }
-            );
-        }
-        else {
-            await mongoose.connect(
-                process.env.MONGODB_ATLAS_URI,
-                { }
-            );
-        }
-        */
         await mongoose.connect(
-            "mongodb+srv://micah-eL:6Bu7scvIV7072KyI@course-collab.v58zgfq.mongodb.net/?retryWrites=true&w=majority",
+            process.env.MONGODB_URI,
             { }
         );
         console.log("Connected to db...");
-        app.listen(PORT, '0.0.0.0', () => {
-            console.log(`Server is listening on http://0.0.0.0:${PORT} ...`);
+        app.listen(PORT, () => {
+            console.log(`Server is listening on http://localhost:${PORT} ...`);
         });
     } catch (err) {
         console.log(err);
