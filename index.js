@@ -1,5 +1,4 @@
 // Instantiate and setup Express app
-// const gcpMetadata = require('gcp-metadata');
 require("dotenv").config();
 const express = require("express");
 const app = express();
